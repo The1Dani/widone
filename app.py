@@ -26,4 +26,6 @@ def after_request(response):
 
 @app.route("/")
 def index():
+    print("Hellow")
     return render_template("index.html")
+
