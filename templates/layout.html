@@ -30,10 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     {% if session["user_id"] %}
                         <ul class="navbar-nav me-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/quote">Quote</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/buy">Buy</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/sell">Sell</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/history">History</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/logs">Logs</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2">
                             <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -50,5 +47,9 @@
         <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}
         </main>
+
+        <footer class="mb-5 small text-center text-muted position-absolute bottom-0 start-50 translate-middle-x">
+            <h6 class="red">By Dani</h6>
+        </footer>
     </body>
 </html>
