@@ -70,6 +70,6 @@ def login():
 def register():
     if request.method == "GET":
         return render_template("register.html")
-    else:
-        redirect("/")
+    elif request.method == "POST":
+        return redirect("/")
 
