@@ -119,6 +119,7 @@ def log():
     return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
 
 """
+asdljahsdlasd
 First this are what you need:
 log.date d
 log.name d

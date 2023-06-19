@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <div class="container">
+        <h1>Dark Table Example</h1>
+        <table class="table table-bordered">
+        <!-- <thead>
+            <tr>
+            <th scope="col">Header 1</th>
+            <th scope="col">Header 2</th>
+            <th scope="col">Header 3</th>
+            </tr>
+        </thead> -->
+            <tbody>
+                    <tr>
+                        <th>date</th>
+                        <th>Time</th>
+                        <th>Duration</th> 
+                    </tr>
+                    <tr>
+                        <th>name</th>
+                        <td>time</td>
+                        <td>duration</td>  
+                    </tr>
+                        <tr>
+                            <th>Break</th>
+                            <td>time</td>
+                            <td>duration</td>
+                        </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
