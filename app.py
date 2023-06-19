@@ -1,5 +1,5 @@
 import os
-
+import time
 from flask import Flask
 from flask import flash, redirect, render_template, session, request
 from flask_session import Session
@@ -58,7 +58,6 @@ def login():
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
-
         # Redirect user to home page
         return redirect("/")
 
@@ -102,5 +101,30 @@ def register():
             user = db.execute("SELECT * FROM users WHERE username = ?", username)
             session["user_id"] = user[0]["id"]
             return redirect("/")
+
+@app.route("/logs")
+@login_required
+def log():
+    # if request.method == "GET":
         
+    #     return render_template("logs.html")  #change to logs.html
+
+     #time
+    named_tuple = time.localtime() # get struct_time
+    log_time = time.strftime("%H:%M:%S", named_tuple)
+    log_date = time.strftime("%Y-%m-%d", named_tuple)
+    logs = db.execute("SELECT * FROM logs where user_id = ?", session["user_id"])
+    print(logs)
+
+    return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
+
+"""
+First this are what you need:
+log.date d
+log.name d
+log.duration d
+time d
+log.break d
+log.break_duration d
+"""
 

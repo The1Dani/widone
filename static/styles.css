@@ -23,7 +23,7 @@ nav .navbar-brand .green
 }
 
 body {
-    background-color: #434446;
+    background-color: #343a40;
     font-family: 'Merriweather', serif;
     color:white;
 }
@@ -35,3 +35,21 @@ body {
 .red {
     color: #ea433b;
 }
+
+  table {
+    background-color: #343a40;
+    color: #fff;
+    border-color: #212529; /* Set the border color to dark */
+  }
+
+  th {
+    background-color: #212529;
+    color: #fff;
+    border-color: #fff; /* Set the border color to light */
+  }
+
+  td {
+    background-color: #6c757d;
+    color: #fff;
+    border-color: #fff; /* Set the border color to light */
+  }
