@@ -114,7 +114,6 @@ def log():
     log_time = time.strftime("%H:%M:%S", named_tuple)
     log_date = time.strftime("%Y-%m-%d", named_tuple)
     logs = db.execute("SELECT * FROM logs where user_id = ?", session["user_id"])
-    print(logs)
 
     return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
 
