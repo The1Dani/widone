@@ -19,6 +19,11 @@ Session(app)
 # Configuring and giving the database
 db = SQL("sqlite:///widone.db")
 
+#Times
+named_tuple = time.localtime() # get struct_time
+real_time = time.strftime("%H:%M:%S", named_tuple)
+date = time.strftime("%Y-%m-%d", named_tuple)
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -111,8 +116,8 @@ def log():
 
      #time
     named_tuple = time.localtime() # get struct_time
-    log_time = time.strftime("%H:%M:%S", named_tuple)
-    log_date = time.strftime("%Y-%m-%d", named_tuple)
+    log_time = real_time
+    log_date = date
     logs = db.execute("SELECT * FROM logs where user_id = ?", session["user_id"])
 
     return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
@@ -128,3 +133,11 @@ log.break d
 log.break_duration d
 """
 
+@app.route("/addlog")
+@login_required
+def addlog():
+    if request.method == "GET":
+        return render_template("addlog.html", time=real_time, date=date)
+    elif request.method == "POST":
+        return apology(" ")
+    return apology(" ")

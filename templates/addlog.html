@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <div class="container">
+        <h1>Logs</h1>
+        <table class="table table-bordered">
+        <!-- <thead>
+            <tr>
+            <th scope="col">Header 1</th>
+            <th scope="col">Header 2</th>
+            <th scope="col">Header 3</th>
+            </tr>
+        </thead> -->
+            <tbody>
+                    <tr>
+                        <th>{{date}}</th>
+                        <th>Duration</th>
+                        <th>Time</th>
+                        </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>Duration</td>
+                        <td>{{time}}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
