@@ -76,4 +76,12 @@ class Log:
                 data_id = l["log_id"]
         self.logid = data_id
         
-    
+class Logs:
+    def __init__(self):
+        logs = db.execute("SELECT * FROM logs WHERE user_id = ?", session["user_id"])
+        times = db.execute("SELECT * FROM times WHERE log_id IN (SELECT log_id FROM logs WHERE user_id = ?)", session["user_id"])
+        for log in logs:
+            for time in times:
+                if log["log_id"] == time["log_id"]:
+                    log["log_time"] = time["log_time"]
+        self.logs = logs

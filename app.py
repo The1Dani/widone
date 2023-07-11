@@ -7,7 +7,7 @@ from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 
-from helpers import apology, login_required, Log
+from helpers import apology, login_required, Log, Logs
 
 app = Flask(__name__)
 
@@ -115,12 +115,13 @@ def log():
         named_tuple = time.localtime() # get struct_time
         log_time = real_time
         log_date = date
-        logs = db.execute("SELECT * FROM logs WHERE user_id = ?", session["user_id"])
-        #? times = db.execute("SELECT * FROM times WHERE log_id") write an sql querry that grabs the log_ids that this user has!
-        return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
+        test = Logs()
+        test = test.logs
+        return render_template("logs.html", logs=test, time=log_time, date=log_date)     
     elif request.method == "POST":
-        log_id = request.form.get("delete") 
-        db.execute("DELETE FROM logs WHERE log_id=?", log_id)
+        log_id = request.form.get("delete")
+        print(log_id)
+        #! problem! print(db.execute("DELETE logs.*, times.* FROM logs INNER JOIN times ON logs.log_id = times.log_id WHERE logs.log_id = ?", log_id))
         return redirect("/logs")
 """
 asdljahsdlasdasdasdasdad
