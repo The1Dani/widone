@@ -49,6 +49,7 @@ class Log:
         self.name = request.form.get("log-name")
         self.dur = request.form.get("log-duration")
         self.userid = session["user_id"]
+        print(real_time)
         self.time = real_time
         self.date = date
 

@@ -22,7 +22,7 @@
                     <tr>
                         <th>{{log.log_name}}</th>
                         <td>{{log.log_duration}}</td>
-                        <td>{{time}}</td>
+                        <td>{{log.log_time}}</td>
                         <form action="/logs" method="post">
                             <td><button class="btn btn-dark" type="submit" name="delete" value="{{log.log_id}}">Delete</button></td>
                         </form>
