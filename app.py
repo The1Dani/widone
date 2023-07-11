@@ -121,7 +121,8 @@ def log():
     elif request.method == "POST":
         log_id = request.form.get("delete")
         print(log_id)
-        #! problem! print(db.execute("DELETE logs.*, times.* FROM logs INNER JOIN times ON logs.log_id = times.log_id WHERE logs.log_id = ?", log_id))
+        db.execute("DELETE FROM logs WHERE log_id = ?", log_id)
+        db.execute("DELETE FROM times WHERE log_id = ?", log_id)
         return redirect("/logs")
 """
 asdljahsdlasdasdasdasdad
