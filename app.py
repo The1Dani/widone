@@ -107,21 +107,21 @@ def register():
             session["user_id"] = user[0]["id"]
             return redirect("/")
 
-@app.route("/logs")
+@app.route("/logs", methods=["GET", "POST"])
 @login_required
 def log():
-    # if request.method == "GET":
+    if request.method == "GET":
         
-    #     return render_template("logs.html")  #change to logs.html
-
-     #time
-    named_tuple = time.localtime() # get struct_time
-    log_time = real_time
-    log_date = date
-    logs = db.execute("SELECT * FROM logs where user_id = ?", session["user_id"])
-
-    return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
-
+        named_tuple = time.localtime() # get struct_time
+        log_time = real_time
+        log_date = date
+        logs = db.execute("SELECT * FROM logs WHERE user_id = ?", session["user_id"])
+        #? times = db.execute("SELECT * FROM times WHERE log_id") write an sql querry that grabs the log_ids that this user has!
+        return render_template("logs.html", logs=logs, time=log_time, date=log_date)     
+    elif request.method == "POST":
+        log_id = request.form.get("delete") 
+        db.execute("DELETE FROM logs WHERE log_id=?", log_id)
+        return redirect("/logs")
 """
 asdljahsdlasdasdasdasdad
 First this are what you need:
@@ -149,10 +149,12 @@ def addlog():
     elif request.method == "POST":
         log = Log()
         log.me()
-        db.execute("INSERT INTO logs (user_id, log_name, log_duration, log_break) VALUES(?,?,?,?)", log.userid, log.name, log.dur, log.lbreak)
-
+        db.execute("INSERT INTO logs (user_id, log_name, log_duration, log_break, log_date) VALUES(?,?,?,?,?)", log.userid, log.name, log.dur, log.lbreak, log.date)
+        log.grab_id()
+        db.execute("INSERT INTO times (log_time, log_id) VALUES(?,?)", log.time, log.logid)
+        
         if log.lbreak:
             db.execute("UPDATE logs SET log_break_duration=? WHERE user_id=?", log.breakdur, log.userid)
-        
+
         return redirect("/addlog")
     return apology(" ")

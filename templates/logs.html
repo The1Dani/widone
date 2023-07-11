@@ -14,20 +14,25 @@
             <tbody>
                 {% for log in logs %}
                     <tr>
-                        <th>{{date}}</th>
+                        <th>{{log.log_date}}</th>
                         <th>Duration</th>
                         <th>Time</th>
+                        <th></th>
                         </tr>
                     <tr>
                         <th>{{log.log_name}}</th>
                         <td>{{log.log_duration}}</td>
-                        <td>{{time}}</td>
+                        <td>{{}}</td>
+                        <form action="/logs" method="post">
+                            <td><button class="btn btn-dark" type="submit" name="delete" value="{{log.log_id}}">Delete</button></td>
+                        </form>
                     </tr>
                     {% if log.log_break %}
                         <tr>
                             <th>Break</th>
                             <td>{{log.log_break_duration}}</td>
                             <td>{{time}}</td>
+                            <td></td>
                         </tr>
                     {% endif %}
                 {% endfor %}

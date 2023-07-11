@@ -2,6 +2,18 @@ from flask import Flask
 from flask import flash, redirect, render_template, session, request
 from flask_session import Session
 from functools import wraps
+from cs50 import SQL
+import time
+
+#db
+
+db = SQL("sqlite:///widone.db")
+
+#Time
+
+named_tuple = time.localtime() # get struct_time
+real_time = time.strftime("%H:%M:%S", named_tuple)
+date = time.strftime("%Y-%m-%d", named_tuple)
 
 
 def apology(message, code=400):
@@ -37,6 +49,8 @@ class Log:
         self.name = request.form.get("log-name")
         self.dur = request.form.get("log-duration")
         self.userid = session["user_id"]
+        self.time = real_time
+        self.date = date
 
         if request.form.get("log-break"):
             self.lbreak = True
@@ -52,4 +66,14 @@ class Log:
         print(self.dur)
         print(self.lbreak)
         print(self.breakdur)
+        print(self.time + " : " +self.date)
+    
+    def grab_id(self):
+        data = db.execute("SELECT log_id FROM logs")
+        data_id = 0
+        for l in data:
+            if l["log_id"] > data_id:
+                data_id = l["log_id"]
+        self.logid = data_id
+        
     
