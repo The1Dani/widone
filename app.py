@@ -7,7 +7,7 @@ from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 
-from helpers import apology, login_required
+from helpers import apology, login_required, Log
 
 app = Flask(__name__)
 
@@ -125,19 +125,34 @@ def log():
 """
 asdljahsdlasdasdasdasdad
 First this are what you need:
-log.date d
-log.name d
-log.duration d
-time d
-log.break d
-log.break_duration d
+log.date d-
+time d-
+log.name d-u
+log.duration d-u
+log.break d-u
+log.break_duration d-u
+
 """
 
-@app.route("/addlog")
+@app.route("/addlog", methods=["GET", "POST"])
 @login_required
 def addlog():
+
+    #! db.execute("SELECT * FROM users WHERE username = ?", username)
+
+    #! db.execute("INSERT INTO users (username, hash) VALUES(?,?)", username, generate_password_hash(password))
+    #! db.execute("UPDATE users SET cash=? WHERE id=?", user_money, user_id)        
+
+
     if request.method == "GET":
         return render_template("addlog.html", time=real_time, date=date)
     elif request.method == "POST":
-        return apology(" ")
+        log = Log()
+        log.me()
+        db.execute("INSERT INTO logs (user_id, log_name, log_duration, log_break) VALUES(?,?,?,?)", log.userid, log.name, log.dur, log.lbreak)
+
+        if log.lbreak:
+            db.execute("UPDATE logs SET log_break_duration=? WHERE user_id=?", log.breakdur, log.userid)
+        
+        return redirect("/addlog")
     return apology(" ")
